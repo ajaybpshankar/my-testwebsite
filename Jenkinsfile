@@ -11,9 +11,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                echo "Simulating build process..."
-                sleep 2
-                echo "Build complete."
+                echo "building docker image"
+                docker build -t site .
                 '''
             }
         }
@@ -21,10 +20,8 @@ pipeline {
         stage('Test Command') {
             steps {
                 sh '''
-                echo "Listing files in workspace:"
-                ls -l
-                echo "Current date is:"
-                date
+                echo "creating a container "
+               docker run -d --name my-html-container -p 8081:80 site
                 '''
             }
         }
