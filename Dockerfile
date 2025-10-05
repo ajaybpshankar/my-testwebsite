@@ -1,11 +1,10 @@
 # Use Nginx to serve static HTML
-FROM nginx:alpine
+FROM httpd:latest
 
 # Remove default nginx website
-RUN rm -rf /usr/share/nginx/html/*
 
 # Copy your HTML code into nginx folder
-COPY . /usr/share/nginx/html
+COPY . /usr/local/apache2/htdocs/
 
 # Expose port 80
 EXPOSE 80
